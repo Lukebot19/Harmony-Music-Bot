@@ -74,7 +74,7 @@ module.exports = class Bot extends Client {
 
     async loadDatabase() {
         let db_string =
-          "mongodb+srv://root:toor@cluster0.9to1lyp.mongodb.net/?retryWrites=true&w=majority";
+          process.env.DB;
         return connect(db_string, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -143,14 +143,14 @@ module.exports = class Bot extends Client {
                 
             });
             const rest = new REST({ version: "10" }).setToken(
-              "OTgwMTQ1NDU1NDExMzgwMjk1.GACiA5.iE8lJtd9-ycqS56-G2FHOWdLIg4lrLsuc_NvWg"
+              process.env.TOKEN
             );
             (async () => {
               try {
                 console.log("Started refreshing application (/) commands.");
 
                 await rest.put(
-                  Routes.applicationCommands("980145455411380295"),
+                  Routes.applicationCommands(process.env.CLIENT_ID),
                   {
                     body: commands,
                   }
